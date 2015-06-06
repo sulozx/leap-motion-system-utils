@@ -19,9 +19,9 @@ class FunctionsHelper:
         elif MY_SYSTEM == 'Linux':
             self.lock_screen = self.lock_screen_linux
         else:
-            self.lock_screen = self.unimplemented
+            self.lock_screen = self.notimplemented
 
-    def unimplemented(self):
+    def notimplemented(self):
         raise NotImplementedError()
 
     def lock_screen_windows(self):
@@ -45,11 +45,9 @@ class GestureListener(Leap.Listener):
 
     def on_frame(self, controller):
         frame = controller.frame()
-        swipe_count = 0
         for gesture in frame.gestures():
             if gesture.type == Leap.Gesture.TYPE_SWIPE:
                 swipe = Leap.SwipeGesture(gesture)
-                swipe_count += 1
                 print 'SWIPE: %d' % swipe.id
                 self.helper.lock_screen()
 
